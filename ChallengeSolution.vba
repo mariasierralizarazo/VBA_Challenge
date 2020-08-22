@@ -1,5 +1,6 @@
 Sub VBA_Challenge()
 
+    'Variables declaration
 Dim ws As Worksheet
 Dim total_open As Double
 Dim total_close As Double
@@ -15,7 +16,7 @@ Dim ticker_name As String
 Dim ticker_num As Integer
 Dim New_table As Integer
 
-
+    ' Loop for running on every worksheet
 For Each ws In ThisWorkbook.Worksheets
 
 ws.Activate
@@ -26,15 +27,17 @@ total_open = 0
 total_colose = 0
 Vol = 0
 
-
+    ' Summary table titles
 Cells(1, 10).Value = "Ticker"
 Cells(1, 11).Value = "Yearly Change"
 Cells(1, 12).Value = "Percent Change"
 Cells(1, 13).Value = "Total Stock Volume"
 
+    'Last row identification
 Dim last_row As Long
 last_row = Cells(Rows.Count, 1).End(xlUp).Row
 
+' Loop for getting the Yearly change from opening price to the closing price each year, the yearly percentage change, and the total stock volume.
 For i = 2 To last_row
     If i = 2 Then
         total_open = Cells(i, 3).Value
@@ -75,13 +78,13 @@ For i = 2 To last_row
     End If
 Next i
 
-
+' Table titles
 Cells(2, 15).Value = "Greatest % Increase"
 Cells(3, 15).Value = "Greatest % Decrease"
 Cells(4, 15).Value = "Greatest Total Volume"
 Cells(1, 16).Value = "Ticker"
 Cells(1, 17).Value = "Value"
-
+' Loop for getting the greatest percentage increase, the greatest percentage decrese, and the greatest total stock volume
 For i = 2 To ticker_num
     If (i = 2) Then
         Increase = Cells(i, 10).Value
